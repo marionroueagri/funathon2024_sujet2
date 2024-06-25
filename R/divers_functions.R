@@ -2,8 +2,7 @@
 
 create_data_from_input <- function(df, annee){
   
-  df <- df %>% 
-    filter(annee == "2020")
+  df <- df %>% filter(an == annee)
   
   return(df)
 }
