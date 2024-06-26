@@ -15,7 +15,6 @@ server <- function(input, output) {
   output$graph_freq <- renderPlotly({
     aeroport_choisi <- input$choix_aeroport
     aeroport_choisi <- str_extract(string = aeroport_choisi, pattern = "(?<=\\()[A-Z]+(?=\\))")
-    print(aeroport_choisi)
     plot_airport_line(donnees_aeroport, aeroport_choisi)
   })
   
