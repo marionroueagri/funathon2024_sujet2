@@ -1,8 +1,8 @@
 
 
-create_data_from_input <- function(df, annee){
+create_data_from_input <- function(df, month, year){
   
-  df <- df %>% filter(an == annee)
+  df <- df %>% filter(mois == month & an == year)
   
   return(df)
 }

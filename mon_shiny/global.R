@@ -12,7 +12,9 @@ library(lubridate)
 library(ggplot2)
 library(plotly)
 library(gt)
-
+library(shiny)
+library(shinydashboard)
+library(shinyWidgets)
 
 # 2 - Fonctions -----------------------------------------------------------
 
@@ -35,35 +37,5 @@ donnees_liaisons <- import_liaisons_data(urls$liaisons)
 
 airports_location <- st_read(urls$geojson$airport)
 
-# leaflet(airports_location) %>% 
-#   addTiles() %>% 
-#   addMarkers(popup = ~Nom)
-
-
-
-# 4 - Valorisation 1 : le trafic par aéroport -----------------------------
-
-liste_aeroports <- donnees_aeroport %>% distinct(apt, apt_nom)
-
-# Tracé Toulouse
-plot_airport_line(donnees_aeroport, "LFBO")
-# Tracé Brest
-plot_airport_line(donnees_aeroport, "LFRB")
-
-
-
-
-# 4 - Valorisation 2 : Tableau HTML pour afficher les données -------------
-
-# https://gt.rstudio.com/articles/gt.html#a-walkthrough-of-the-gt-basics-with-a-simple-table
-
-tableau_html_stat(donnees_aeroport, "1", "2022")
-
-
-
-
-# 4 - Valorisation 3 : Carte des aéroports --------------------------------
-
-map_leaflet_airport(donnees_aeroport, airports_location, month = "4", year = "2022")
-
-
+liste_aeroports <- unique(paste0(donnees_aeroport$apt_nom, " (", donnees_aeroport$apt, ")"))
+liste_aeroports <- sort(liste_aeroports)

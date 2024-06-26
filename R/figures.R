@@ -1,7 +1,8 @@
 
 plot_airport_line <- function(df, aeroport){
   
-  aeroport_nom <- liste_aeroports$apt_nom[liste_aeroports$apt == aeroport]
+  aeroport_nom <- liste_aeroports[str_detect(string = liste_aeroports, pattern = aeroport)]
+  aeroport_nom <- str_remove(string = aeroport_nom, pattern = "\\([A-Z]+\\)")
   
   df_graph <- df %>% 
     mutate(trafic = apt_pax_dep + apt_pax_arr + apt_pax_tr,
@@ -52,7 +53,8 @@ map_leaflet_airport <- function(df, airports_location, month, year){
     addTiles() %>%
     addAwesomeMarkers(popup = ~paste0(apt_nom, " : ",
                                       format(trafic, big.mark = " "), " passagers "),
-                      icon = icons)
+                      icon = icons) %>% 
+    setView(lng = 2.38, lat = 48.72, zoom = 4)
   
   return(map_leaflet)
   
