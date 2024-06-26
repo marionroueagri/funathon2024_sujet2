@@ -43,8 +43,7 @@ airports_location <- st_read(urls$geojson$airport)
 
 # 4 - Valorisation 1 : le trafic par aéroport -----------------------------
 
-liste_aeroports <- donnees_aeroport %>% 
-  distinct(apt, apt_nom)
+liste_aeroports <- donnees_aeroport %>% distinct(apt, apt_nom)
 
 # Tracé Toulouse
 plot_airport_line(donnees_aeroport, "LFBO")
@@ -70,12 +69,6 @@ tableau_html_stat(donnees_aeroport, "2020")
 
 # 4 - Valorisation 3 : Carte des aéroports --------------------------------
 
-month <- 1
-year <- 2019
-palette <- c("green", "blue", "red")
+map_leaflet_airport(donnees_aeroport, airports_location, month = "4", year = "2022")
 
-trafic_date <- donnees_aeroport %>% 
-  filter(mois == month & an == year)
 
-trafic_aeroports <- airports_location %>% 
-  left_join(trafic_date, by = c("Code.OACI" = "apt"))
