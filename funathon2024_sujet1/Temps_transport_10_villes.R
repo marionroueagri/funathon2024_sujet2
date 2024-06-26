@@ -1,6 +1,7 @@
 library(dplyr)
 library(tidyr)
 library(purrr)
+library(readr)
 
 source("funathon2024_sujet1/fonctions_requetes.R")
 source("funathon2024_sujet1/fonctions_traitement.R")
@@ -57,6 +58,6 @@ matrice_gares_principales <- matrice_gares_principales %>%
   select(-temps_1, -temps_2) %>% 
   pivot_wider(names_from = gare_arrivee, values_from = temps_trajet)
   
+write_csv2(matrice_gares_principales, "funathon2024_sujet1/matrice_temps_gares_10_principales.csv")
+  
 remove(matrice_gares_principales_reduite, resultat_requetes)
-  
-  
